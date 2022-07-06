@@ -1,0 +1,24 @@
+server:
+  port: 8101
+
+spring:
+  application:
+    name: order-service
+
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/colud_order
+      username: root
+      password: 1234
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      table-prefix: tb_
+  type-aliases-package: com.cloud.order.model
+
+logging:
+  level:
+    com.cloud.order: debug
