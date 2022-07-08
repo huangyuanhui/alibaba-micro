@@ -40,6 +40,7 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- spring-cloud-alibaba的管理依赖 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

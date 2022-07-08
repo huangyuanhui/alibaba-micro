@@ -1,12 +1,14 @@
 package com.cloud.order.controller;
 
 import com.cloud.order.model.Order;
+import com.cloud.order.model.User;
 import com.cloud.order.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RequestMapping("/orders")
 @RestController
@@ -15,8 +17,15 @@ public class OrderController {
     @Autowired
     private IOrderService orderService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @GetMapping("/{id}")
     public Order getById(@PathVariable("id") Long id) {
-        return orderService.getById(id);
+        Order order = orderService.getById(id);
+        String url = "http://user-service/users/" + order.getUserId();
+        User user = restTemplate.getForObject(url, User.class);
+        order.setUser(user);
+        return order;
     }
 }
