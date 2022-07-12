@@ -32,6 +32,6 @@ mybatis-plus:
 
 logging:
   level:
-    com.cloud.order: debug
+    com.cloud: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
