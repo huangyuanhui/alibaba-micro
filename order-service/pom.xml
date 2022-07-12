@@ -27,12 +27,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!-- 使用带链接池Apache HttpClient代替默认的URLConnection -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+        </dependency>
         <!-- alibaba 2021.0.1.0剔除了Ribbon，因此需要自己引入Loadbalancer -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>mysql</groupId>
