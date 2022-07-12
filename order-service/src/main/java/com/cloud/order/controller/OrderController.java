@@ -1,5 +1,6 @@
 package com.cloud.order.controller;
 
+import com.cloud.order.clients.UserClient;
 import com.cloud.order.model.Order;
 import com.cloud.order.model.User;
 import com.cloud.order.service.IOrderService;
@@ -20,11 +21,20 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private UserClient userClient;
+
     @GetMapping("/{id}")
     public Order getById(@PathVariable("id") Long id) {
         Order order = orderService.getById(id);
-        String url = "http://user-service/users/" + order.getUserId();
-        User user = restTemplate.getForObject(url, User.class);
+
+        // restTemplate
+        // String url = "http://user-service/users/" + order.getUserId();
+        // User user = restTemplate.getForObject(url, User.class);
+
+        // feign
+        User user = userClient.getById(order.getUserId());
+
         order.setUser(user);
         return order;
     }
