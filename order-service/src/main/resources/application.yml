@@ -35,3 +35,9 @@ logging:
     com.cloud.order: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
+
+#feign:
+#  client:
+#    config:
+#      default:  # 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置（如：user-service）
+#        loggerLevel: FULL  # 日志级别
