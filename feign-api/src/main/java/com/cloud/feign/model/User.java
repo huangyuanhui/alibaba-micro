@@ -1,4 +1,4 @@
-package com.cloud.order.model;
+package com.cloud.feign.model;
 
 import lombok.Data;
 

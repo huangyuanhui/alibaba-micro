@@ -1,13 +1,12 @@
-package com.cloud.order.clients;
+package com.cloud.feign.clients;
 
-import com.cloud.order.model.User;
+import com.cloud.feign.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient("user-service")
+@FeignClient(value = "user-service")
 public interface UserClient {
-
     @GetMapping("/users/{id}")
     User getById(@PathVariable("id") Long id);
 }

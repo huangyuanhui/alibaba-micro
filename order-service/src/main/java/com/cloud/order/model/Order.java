@@ -1,6 +1,7 @@
 package com.cloud.order.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.cloud.feign.model.User;
 import lombok.Data;
 
 @Data
