@@ -1,0 +1,28 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+
+    gateway:
+      routes: # 网关路由配置
+        - id: order-service # 路由id，自定义，唯一即可，一般是服务名称
+          #uri: http://127.0.0.1:8101  # 路由的目标地址，http就是固定地址
+          uri: lb://order-service  # 路由的目标地址，lb就是负载均衡（就是网关做请求转发路由的时候要做负载均衡），后面跟上服务名称，因此gateway会拿服务名去注册中心拉取服务列表，而后做负载均衡，实现请求路由
+          predicates: # 路由断言（就是判断），也就是判断请求是否符合路由规则的条件
+            - Path=/orders/**  # 这个是按照路径匹配的路由规则，只要以 /user/ 开头就符合要求
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+
+logging:
+  level:
+    com.cloud.gateway: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
