@@ -15,7 +15,8 @@ spring:
           uri: lb://order-service  # 路由的目标地址，lb就是负载均衡（就是网关做请求转发路由的时候要做负载均衡），后面跟上服务名称，因此gateway会拿服务名去注册中心拉取服务列表，而后做负载均衡，实现请求路由
           predicates: # 路由断言（就是判断），也就是判断请求是否符合路由规则的条件
             - Path=/orders/**  # 这个是按照路径匹配的路由规则，只要以 /user/ 开头就符合要求
-
+            #- After=2031-04-13T15:14:47.433+08:00[Asia/Shanghai]
+            - Before=2031-04-13T15:14:47.433+08:00[Asia/Shanghai]
         - id: user-service
           uri: lb://user-service
           predicates:
