@@ -5,10 +5,7 @@ import com.cloud.user.model.User;
 import com.cloud.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +20,11 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable("id") Long id) {
+    public User getById(@PathVariable("id") Long id,
+                        @RequestHeader(value = "Truth", required = false) String truth,
+                        @RequestHeader(value = "Comment", required = false) String comment) {
+        System.out.println("truth = " + truth);
+        System.out.println("comment = " + comment);
         return userService.getById(id);
     }
 
