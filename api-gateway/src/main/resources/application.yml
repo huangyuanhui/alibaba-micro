@@ -28,9 +28,9 @@ spring:
         - AddRequestHeader=Comment,Spring Cloud Alibaba is very NB too
 
       globalcors: # 全局的跨域处理
-        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题，CORS是浏览器去问服务器，让不让ajax跨域，有一次询问，这个询问请求方式是options，默认情况下，这种请求是会被网关拦截的，加了这个配置就是不拦截options请求，这样CORS的询问请求就会正常发出
         corsConfigurations:
-          '[/**]':
+          '[/**]':  # 拦截一切请求，凡是进入网关的请求，都做跨域处理
             allowedOrigins: # 允许哪些网站的跨域请求
               - "http://localhost:8090"
             allowedMethods: # 允许的跨域ajax的请求方式
@@ -41,7 +41,7 @@ spring:
               - "OPTIONS"
             allowedHeaders: "*" # 允许在请求中携带的头信息
             allowCredentials: true # 是否允许携带cookie
-            maxAge: 360000 # 这次跨域检测的有效期
+            maxAge: 360000 # 这次跨域检测的有效期，因为，如果每一次ajax请求都问一次，对服务器的开销是很大的，因此，跨域的CORS解决方案对性能有影响，为了减少影响，可以给跨域请求设置有效期，有效期范围内，浏览器将不再发起询问，而实直接放行，提高行性能
 
 logging:
   level:
